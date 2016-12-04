@@ -7,15 +7,19 @@ bool isCollide(sf::Sprite s1, sf::Sprite s2)
     return s1.getGlobalBounds().intersects(s2.getGlobalBounds());
 }
 
-sf::Sprite loadBackground()
+sf::String backgroundFile()
 {
     int backgroundId = rand() % backgroundsCount;
 
-    sf::Texture tBackground;
-    tBackground.loadFromFile(backgrounds[backgroundId]);
-    sf::Sprite sBackground(tBackground);
+    return backgrounds[backgroundId];
+}
 
-    return sBackground;
+sf::Texture loadBackground()
+{
+    sf::Texture tBackground;
+    tBackground.loadFromFile(backgroundFile());
+
+    return tBackground;
 }
 
 int main()
@@ -26,7 +30,9 @@ int main()
     sf::RenderWindow app(sf::VideoMode(winSize[0], winSize[1]), gameTitle);
 
     // Load a sprite to display
-    sf::Sprite sBackground = loadBackground();
+    sf::Texture tBackground = loadBackground();
+    sf::Sprite sBackground(tBackground);
+
 
     // sf::Texture tBlock;
     // if (!tBlock.loadFromFile(blocks[0]))
