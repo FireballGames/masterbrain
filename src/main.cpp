@@ -90,6 +90,16 @@ int gameWindow(sf::RenderWindow &window)
                 window.close();
             if (event.type == sf::Event::KeyPressed)
                 return EXIT_SUCCESS;
+            if (event.type == sf::Event::MouseButtonPressed)
+                if (event.mouseButton.button == sf::Mouse::Left)
+                    {
+                        for(int i=0; i<cardsCount; i++)
+                        {
+                            sf::Vector2i MousePoint = sf::Mouse::getPosition(window);
+                            if(sCard[i].getGlobalBounds().contains(MousePoint.x, MousePoint.y))
+                                sCard[i].setTextureRect(sf::IntRect(1 * 32, cardSetId * 32, 32, 32));
+                        }
+                    }
         }
 
         //  sBall.move(dx, 0);
