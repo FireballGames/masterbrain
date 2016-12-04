@@ -33,11 +33,29 @@ int main()
     sf::Texture tBackground = loadBackground();
     sf::Sprite sBackground(tBackground);
 
+    sf::Texture tLogoTitle;
+    if (!tLogoTitle.loadFromFile(logoTitle))
+        return EXIT_FAILURE;
+    sf::Sprite sLogoTitle(tLogoTitle);
+    sLogoTitle.move(logoTitlePos[0], logoTitlePos[1]);
 
-    // sf::Texture tBlock;
-    // if (!tBlock.loadFromFile(blocks[0]))
-    //     return EXIT_FAILURE;
-    // sf::Sprite sBlock[blocksCount];
+    sf::Texture tLogoCredits;
+    if (!tLogoCredits.loadFromFile(logoCredits))
+        return EXIT_FAILURE;
+    sf::Sprite sLogoCredits(tLogoCredits);
+    sLogoCredits.move(logoCreditsPos[0], logoCreditsPos[1]);
+
+    sf::Font mainFont;
+    if (!mainFont.loadFromFile(fontFile))
+        return EXIT_FAILURE;
+
+    sf::Text testText;
+    testText.setFont(mainFont);
+    testText.setCharacterSize(fontSize);
+    testText.setColor(fontColor);
+    testText.move(boxPos[0] + 16, boxPos[1] + 16);
+    testText.setString("Hello world");
+
 
     //  int n = 0;
     //  for(int i=1; i<blockCols; i++)
@@ -60,8 +78,8 @@ int main()
     //  sf::Sprite sPaddle(tPaddle);
     //  sPaddle.setPosition(paddlePos[0], paddlePos[1]);
 
-    float dx = ballSpeed[0];
-    float dy = ballSpeed[1];
+    // float dx = ballSpeed[0];
+    // float dy = ballSpeed[1];
 
 	// Start the game loop
     while (app.isOpen())
@@ -111,8 +129,9 @@ int main()
 
         // Draw the sprite
         app.draw(sBackground);
-        //  app.draw(sPaddle);
-        //  app.draw(sBall);
+        app.draw(sLogoTitle);
+        app.draw(sLogoCredits);
+        app.draw(testText);
 
         //  for(int i=0; i<n; i++)
         //  {

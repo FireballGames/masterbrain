@@ -4,12 +4,13 @@
 #include <SFML/Graphics.hpp>
 
 sf::String gameTitle = "Master Brain";
-int winSize[2] =  {800, 600}; // {256, 192};
+ int winSize[2] = {800, 600};
+// int winSize[2] = {256, 192};
 
-const int M = 450;
-const int N = 520;
-// int boxPosition[2] = {28, 18};
-int boxSize[2] = {N, M};
+const int M = 256;
+const int N = 192;
+int boxPos[2] = {(winSize[0] - M)/2, (winSize[1] - N)/2};
+int boxSize[2] = {M, N};
 // int pointSize[2] = {18, 18};
 int fps = 60;
 
@@ -26,6 +27,16 @@ sf::String backgrounds[10] = {
     "res/background/9.png",
     "res/background/10.png",
 };
+
+int logoTitlePos[2] = {boxPos[0], boxPos[1]};
+sf::String logoTitle = "res/title.bmp";
+
+int logoCreditsPos[2] = {boxPos[0], boxPos[1] + N - 40};
+sf::String logoCredits = "res/credits.bmp";
+
+sf::String fontFile = "res/zx_spectrum-7.ttf";
+int fontSize = 32;
+sf::Color fontColor = sf::Color::Yellow;
 
 int blocksCount = 1000;
 int blockCols = 10;
