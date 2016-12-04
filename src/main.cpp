@@ -33,17 +33,26 @@ int gameWindow(sf::RenderWindow &window)
         return EXIT_FAILURE;
     sf::Sprite sCard[40];
 
+    int field[40];
+    for(int i=0; i<40; i++)
+    {
+        field[i] = i / 2;
+    }
+
     int cardsCount = (level + 1) * 10;
-    int columns = (level + 1) * 2;
+    int columns = cardsCount / 5;
     for(int i=0; i<cardsCount; i++)
     {
-        int cardId = i / 2;
+        std::swap(field[i], field[rand() % cardsCount]);
+    }
+
+    for(int i=0; i<cardsCount; i++)
+    {
         sCard[i].setTexture(tCardSet);
         sCard[i].setPosition((i % columns) * 36 + 4 + boxPos[0], (i / columns) * 36 + 4 + boxPos[1]);
-        sCard[i].setTextureRect(sf::IntRect(cardId * 32, cardSetId * 32, 32, 32));
+        // sCard[i].setTextureRect(sf::IntRect(field[i] * 32, cardSetId * 32, 32, 32));
+        sCard[i].setTextureRect(sf::IntRect(20 * 32, cardSetId * 32, 32, 32));
     }
-    // sCardSet.move(logoTitlePos[0], logoTitlePos[1]);
-
 
     //  int n = 0;
     //  for(int i=1; i<blockCols; i++)
