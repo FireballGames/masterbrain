@@ -35,7 +35,7 @@ int logoCreditsPos[2] = {boxPos[0], boxPos[1] + N - 40};
 sf::String logoCredits = "res/credits.bmp";
 
 sf::String fontFile = "res/zx_spectrum-7.ttf";
-int fontSize = 32;
+int fontSize = 16;
 sf::Color fontColor = sf::Color::Yellow;
 
 int blocksCount = 1000;

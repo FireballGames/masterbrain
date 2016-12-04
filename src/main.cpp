@@ -22,16 +22,8 @@ sf::Texture loadBackground()
     return tBackground;
 }
 
-int main()
+int mainMenu(sf::RenderWindow &window)
 {
-    srand(time(0));
-
-    // Create the main window
-    sf::RenderWindow app(sf::VideoMode(winSize[0], winSize[1]), gameTitle);
-
-    // Load a sprite to display
-    sf::Texture tBackground = loadBackground();
-    sf::Sprite sBackground(tBackground);
 
     sf::Texture tLogoTitle;
     if (!tLogoTitle.loadFromFile(logoTitle))
@@ -53,9 +45,89 @@ int main()
     testText.setFont(mainFont);
     testText.setCharacterSize(fontSize);
     testText.setColor(fontColor);
-    testText.move(boxPos[0] + 16, boxPos[1] + 16);
-    testText.setString("Hello world");
+    testText.move(boxPos[0] + 16, boxPos[1] + 24);
 
+    sf::String menuStrings[8] = {
+        "1.\tSTART ONE PLAYER GAME\n",
+        "2.\tSTART TWO PLAYER GAME\n",
+        "3.\tLEVEL 2\n",
+        "4.\tCARD SET SPECTRUM HEROES\n"
+        "5.\tSOUND ON\n",
+        "6.\tCARDS MOVING NO\n",
+        "7.\tVIEW CARD SET\n",
+        "ESC\tEXIT\n"
+    };
+
+    sf::String menuFull;
+    for(int i=0; i < 7; i++)
+    {
+        menuFull += menuStrings[i];
+    }
+    // menuFull += menuStrings[7];
+
+    testText.setString(menuFull);
+
+
+	// Start the game loop
+    while (window.isOpen())
+    {
+        // Process events
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            // Close window : exit
+            if (event.type == sf::Event::Closed)
+                window.close();
+            if (event.type == sf::Event::KeyPressed)
+            {
+                if(event.key.code == sf::Keyboard::Num1)
+                    return EXIT_SUCCESS;
+                if(event.key.code == sf::Keyboard::Num2)
+                    return EXIT_SUCCESS;
+                if(event.key.code == sf::Keyboard::Num3)
+                    return EXIT_SUCCESS;
+                if(event.key.code == sf::Keyboard::Num4)
+                    return EXIT_SUCCESS;
+                if(event.key.code == sf::Keyboard::Num5)
+                    return EXIT_SUCCESS;
+                if(event.key.code == sf::Keyboard::Num6)
+                    return EXIT_SUCCESS;
+                if(event.key.code == sf::Keyboard::Num7)
+                    return EXIT_SUCCESS;
+                if(event.key.code == sf::Keyboard::Escape)
+                    window.close();
+            }
+        }
+
+        // Clear screen
+        window.clear();
+
+        // Draw the sprite
+        window.draw(sLogoTitle);
+        window.draw(sLogoCredits);
+        window.draw(testText);
+
+        // Update the window
+        window.display();
+    }
+
+    return EXIT_SUCCESS;
+}
+
+int main()
+{
+    srand(time(0));
+
+    // Create the main window
+    sf::RenderWindow app(sf::VideoMode(winSize[0], winSize[1]), gameTitle);
+
+    // Load a sprite to display
+    sf::Texture tBackground = loadBackground();
+    sf::Sprite sBackground(tBackground);
+
+    int res = mainMenu(app);
+    if(res != EXIT_SUCCESS)
+        return res;
 
     //  int n = 0;
     //  for(int i=1; i<blockCols; i++)
@@ -129,9 +201,6 @@ int main()
 
         // Draw the sprite
         app.draw(sBackground);
-        app.draw(sLogoTitle);
-        app.draw(sLogoCredits);
-        app.draw(testText);
 
         //  for(int i=0; i<n; i++)
         //  {
