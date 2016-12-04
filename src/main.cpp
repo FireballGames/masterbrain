@@ -110,6 +110,8 @@ int gameWindow(sf::RenderWindow &window)
                 {
                     sCard[selected[0]].setPosition(-32, -32);
                     sCard[selected[1]].setPosition(-32, -32);
+                    field[selected[0]] = -1;
+                    field[selected[1]] = -1;
                 }
                 else
                 {
