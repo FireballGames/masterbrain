@@ -35,7 +35,7 @@ int logoCreditsPos[2] = {boxPos[0], boxPos[1] + N - 40};
 sf::String logoCredits = "res/credits.bmp";
 
 sf::String fontFile = "res/zx_spectrum-7.ttf";
-int fontSize = 16;
+int fontSize = 24;
 sf::Color fontColor = sf::Color::Yellow;
 
 int blocksCount = 1000;
@@ -60,5 +60,17 @@ sf::String ball = "res/ball.png";
 sf::String paddle = "res/paddle.png";
 
 // sf::String interface = "res/frame.png";
+
+int level = 2;
+int cardSetId = 1;
+bool sound = true;
+bool cardMove = false;
+
+sf::String cardSets[4] = {
+    "NUMBERS",
+    "SPECTRUM HEROES",
+    "KIDS",
+    "COLOUR MASTER",
+};
 
 #endif // SETTINGS_HPP_INCLUDED

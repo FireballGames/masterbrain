@@ -41,32 +41,61 @@ int mainMenu(sf::RenderWindow &window)
     if (!mainFont.loadFromFile(fontFile))
         return EXIT_FAILURE;
 
-    sf::Text testText;
-    testText.setFont(mainFont);
-    testText.setCharacterSize(fontSize);
-    testText.setColor(fontColor);
-    testText.move(boxPos[0] + 16, boxPos[1] + 24);
-
-    sf::String menuStrings[8] = {
-        "1.\tSTART ONE PLAYER GAME\n",
-        "2.\tSTART TWO PLAYER GAME\n",
-        "3.\tLEVEL 2\n",
-        "4.\tCARD SET SPECTRUM HEROES\n"
-        "5.\tSOUND ON\n",
-        "6.\tCARDS MOVING NO\n",
-        "7.\tVIEW CARD SET\n",
+    char menuStrings[8][64] = {
+        "START ONE PLAYER GAME\n",
+        "START TWO PLAYER GAME\n",
+        "LEVEL\n",
+        "CARD SET\n",
+        "SOUND\n",
+        "CARDS MOVING\n",
+        "VIEW CARD SET\n",
         "ESC\tEXIT\n"
     };
 
-    sf::String menuFull;
+    sf::Text menuPoints[7];
     for(int i=0; i < 7; i++)
     {
-        menuFull += menuStrings[i];
+        char menu[32];
+        sprintf(menu, "%d. %s\n", i + 1, menuStrings[i]);
+
+        menuPoints[i].setFont(mainFont);
+        menuPoints[i].setCharacterSize(fontSize);
+        menuPoints[i].setColor(fontColor);
+        menuPoints[i].move(boxPos[0] + 8, boxPos[1] + 16 * (i + 1));
+        menuPoints[i].setString(menu);
     }
-    // menuFull += menuStrings[7];
 
-    testText.setString(menuFull);
+    sf::Text levelText;
+    levelText.setFont(mainFont);
+    levelText.setCharacterSize(fontSize);
+    levelText.setColor(sf::Color::Cyan);
+    levelText.move(boxPos[0] + 8 + 84, boxPos[1] + 16 * 3);
 
+    sf::Text cardSetText;
+    cardSetText.setFont(mainFont);
+    cardSetText.setCharacterSize(fontSize);
+    cardSetText.setColor(sf::Color::Cyan);
+    cardSetText.move(boxPos[0] + 8 + 112, boxPos[1] + 16 * 4);
+
+    sf::Text soundText;
+    soundText.setFont(mainFont);
+    soundText.setCharacterSize(fontSize);
+    soundText.setColor(sf::Color::Cyan);
+    soundText.move(boxPos[0] + 8 + 84, boxPos[1] + 16 * 5);
+
+    sf::Text cardMoveText;
+    cardMoveText.setFont(mainFont);
+    cardMoveText.setCharacterSize(fontSize);
+    cardMoveText.setColor(sf::Color::Cyan);
+    cardMoveText.move(boxPos[0] + 8 + 148, boxPos[1] + 16 * 6);
+
+    char levelStr[2];
+    sprintf(levelStr, "%d", level);
+    levelText.setString(levelStr);
+
+    cardSetText.setString(cardSets[cardSetId]);
+    soundText.setString(sound ? "ON" : "OFF");
+    cardMoveText.setString(cardMove ? "YES" : "NO");
 
 	// Start the game loop
     while (window.isOpen())
@@ -105,7 +134,14 @@ int mainMenu(sf::RenderWindow &window)
         // Draw the sprite
         window.draw(sLogoTitle);
         window.draw(sLogoCredits);
-        window.draw(testText);
+        for(int i=0; i < 7; i++)
+        {
+            window.draw(menuPoints[i]);
+        }
+        window.draw(levelText);
+        window.draw(cardSetText);
+        window.draw(soundText);
+        window.draw(cardMoveText);
 
         // Update the window
         window.display();
