@@ -34,6 +34,7 @@ int gameWindow(sf::RenderWindow &window)
     sf::Sprite sCard[40];
 
     int field[40];
+    int selected[2] = { -1, -1};
     for(int i=0; i<40; i++)
     {
         field[i] = i / 2;
@@ -97,7 +98,29 @@ int gameWindow(sf::RenderWindow &window)
                         {
                             sf::Vector2i MousePoint = sf::Mouse::getPosition(window);
                             if(sCard[i].getGlobalBounds().contains(MousePoint.x, MousePoint.y))
-                                sCard[i].setTextureRect(sf::IntRect(1 * 32, cardSetId * 32, 32, 32));
+                                if (selected[0] < 0)
+                                {
+                                    selected[0] = i;
+                                }
+                                else
+                                {
+                                    if(selected[1] < 0)
+                                    {
+                                        selected[1] = i;
+                                        if(field[selected[0]] == field[selected[1]])
+                                        {
+                                            sCard[selected[0]].setPosition( 0, 0);
+                                            sCard[selected[1]].setPosition(32, 0);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        sCard[selected[0]].setTextureRect(sf::IntRect(20 * 32, cardSetId * 32, 32, 32));
+                                        sCard[selected[1]].setTextureRect(sf::IntRect(20 * 32, cardSetId * 32, 32, 32));
+                                        selected[0] = i;
+                                        selected[1] = -1;
+                                    }
+                                }
                         }
                     }
         }
@@ -140,6 +163,8 @@ int gameWindow(sf::RenderWindow &window)
 
         for(int i=0; i<cardsCount; i++)
         {
+            if((selected[0] == i) || (selected[1] == i))
+                sCard[i].setTextureRect(sf::IntRect(field[i] * 32, cardSetId * 32, 32, 32));
             window.draw(sCard[i]);
         }
 
