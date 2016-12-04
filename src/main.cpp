@@ -33,11 +33,13 @@ int gameWindow(sf::RenderWindow &window)
         return EXIT_FAILURE;
     sf::Sprite sCard[40];
 
-    for(int i=0; i<40; i++)
+    int cardsCount = (level + 1) * 10;
+    int columns = (level + 1) * 2;
+    for(int i=0; i<cardsCount; i++)
     {
         int cardId = i / 2;
         sCard[i].setTexture(tCardSet);
-        sCard[i].setPosition((i % 8) * 36 + 4 + boxPos[0], (i / 8) * 36 + 4 + boxPos[1]);
+        sCard[i].setPosition((i % columns) * 36 + 4 + boxPos[0], (i / columns) * 36 + 4 + boxPos[1]);
         sCard[i].setTextureRect(sf::IntRect(cardId * 32, cardSetId * 32, 32, 32));
     }
     // sCardSet.move(logoTitlePos[0], logoTitlePos[1]);
@@ -117,7 +119,7 @@ int gameWindow(sf::RenderWindow &window)
         // Draw the sprite
         window.draw(sBackground);
 
-        for(int i=0; i<40; i++)
+        for(int i=0; i<cardsCount; i++)
         {
             window.draw(sCard[i]);
         }

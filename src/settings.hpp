@@ -64,7 +64,27 @@ sf::String paddle = "res/paddle.png";
 
 // sf::String interface = "res/frame.png";
 
-int level = 2;
+int level = 2; // 20(4), 30(6), 40(8)
+// JetPac
+// ??? Knife
+// Batman
+// Jack Nipper
+
+// Sabrewolf
+// ----
+// ----
+// Cookie
+
+// Pssst
+// ----
+// ----
+// ??? Head
+
+// ----
+// ??? Viking
+// ??? Panama
+// ----
+
 int cardSetId = 1;
 bool sound = true;
 bool cardMove = false;
