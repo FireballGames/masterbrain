@@ -24,6 +24,10 @@ sf::Texture loadBackground()
 
 int gameWindow(sf::RenderWindow &window)
 {
+    float timer = 0;
+    float delay = 1;
+    sf::Clock clock;
+
     // Load a sprite to display
     sf::Texture tBackground = loadBackground();
     sf::Sprite sBackground(tBackground);
@@ -55,33 +59,13 @@ int gameWindow(sf::RenderWindow &window)
         sCard[i].setTextureRect(sf::IntRect(20 * 32, cardSetId * 32, 32, 32));
     }
 
-    //  int n = 0;
-    //  for(int i=1; i<blockCols; i++)
-    //      for(int j=1; j<blockRows; j++)
-    //      {
-    //          sBlock[n].setTexture(tBlock);
-    //          sBlock[n].setPosition(i * blockW, j * blockH);
-    //          n++;
-    //      }
-
-    //  sf::Texture tBall;
-    //  if (!tBall.loadFromFile(ball))
-    //      return EXIT_FAILURE;
-    //  sf::Sprite sBall(tBall);
-    //  sBall.setPosition(ballPos[0], ballPos[1]);
-
-    //  sf::Texture tPaddle;
-    //  if (!tPaddle.loadFromFile(paddle))
-    //       return EXIT_FAILURE;
-    //  sf::Sprite sPaddle(tPaddle);
-    //  sPaddle.setPosition(paddlePos[0], paddlePos[1]);
-
-    // float dx = ballSpeed[0];
-    // float dy = ballSpeed[1];
-
 	// Start the game loop
     while (window.isOpen())
     {
+        float time = clock.getElapsedTime().asSeconds();
+        clock.restart();
+        timer += time;
+
         // Process events
         sf::Event event;
         while (window.pollEvent(event))
@@ -107,53 +91,37 @@ int gameWindow(sf::RenderWindow &window)
                                     if(selected[1] < 0)
                                     {
                                         selected[1] = i;
-                                        if(field[selected[0]] == field[selected[1]])
-                                        {
-                                            sCard[selected[0]].setPosition(-32, -32);
-                                            sCard[selected[1]].setPosition(-32, -32);
-                                        }
+                                        timer = 0;
                                     }
                                     else
                                     {
-                                        sCard[selected[0]].setTextureRect(sf::IntRect(20 * 32, cardSetId * 32, 32, 32));
-                                        sCard[selected[1]].setTextureRect(sf::IntRect(20 * 32, cardSetId * 32, 32, 32));
-                                        selected[0] = i;
-                                        selected[1] = -1;
+                                        timer = delay + 1;
                                     }
                                 }
                         }
                     }
         }
 
-        //  sBall.move(dx, 0);
-        //  for(int i=0; i<n; i++)
-        //      if(isCollide(sBall, sBlock[i]))
-        //      {
-        //          sBlock[i].setPosition(posNowhere[0], posNowhere[1]);
-        //          dx = -dx;
-        //      }
+        if(timer > delay)
+        {
+            if(selected[1] >= 0)
+            {
+                if(field[selected[0]] == field[selected[1]])
+                {
+                    sCard[selected[0]].setPosition(-32, -32);
+                    sCard[selected[1]].setPosition(-32, -32);
+                }
+                else
+                {
+                    sCard[selected[0]].setTextureRect(sf::IntRect(20 * 32, cardSetId * 32, 32, 32));
+                    sCard[selected[1]].setTextureRect(sf::IntRect(20 * 32, cardSetId * 32, 32, 32));
+                }
+                selected[0] = -1;
+                selected[1] = -1;
+            }
 
-        //  sBall.move(0, dy);
-        //  for(int i=0; i<n; i++)
-        //      if(isCollide(sBall, sBlock[i]))
-        //      {
-        //          sBlock[i].setPosition(posNowhere[0], posNowhere[1]);
-        //          dy = -dy;
-        //      }
-
-        //  sf::Vector2f b = sBall.getPosition();
-        //  if(b.x < 0 || b.x > N)
-        //      dx = -dx;
-        //  if(b.y < 0 || b.y > M)
-        //      dy = -dy;
-
-        //  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        //      sPaddle.move( 6, 0);
-        //  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        //      sPaddle.move(-6, 0);
-
-        //  if(isCollide(sPaddle, sBall))
-        //      dy = -(rand() % 5 + 2);
+            timer = 0;
+        }
 
         // Clear screen
         window.clear();
