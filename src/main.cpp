@@ -28,6 +28,21 @@ int gameWindow(sf::RenderWindow &window)
     sf::Texture tBackground = loadBackground();
     sf::Sprite sBackground(tBackground);
 
+    sf::Texture tCardSet;
+    if (!tCardSet.loadFromFile(cardSetFile))
+        return EXIT_FAILURE;
+    sf::Sprite sCard[40];
+
+    for(int i=0; i<40; i++)
+    {
+        int cardId = i / 2;
+        sCard[i].setTexture(tCardSet);
+        sCard[i].setPosition((i % 8) * 36 + 4 + boxPos[0], (i / 8) * 36 + 4 + boxPos[1]);
+        sCard[i].setTextureRect(sf::IntRect(cardId * 32, cardSetId * 32, 32, 32));
+    }
+    // sCardSet.move(logoTitlePos[0], logoTitlePos[1]);
+
+
     //  int n = 0;
     //  for(int i=1; i<blockCols; i++)
     //      for(int j=1; j<blockRows; j++)
@@ -102,10 +117,10 @@ int gameWindow(sf::RenderWindow &window)
         // Draw the sprite
         window.draw(sBackground);
 
-        //  for(int i=0; i<n; i++)
-        //  {
-        //      app.draw(sBlock[i]);
-        //  }
+        for(int i=0; i<40; i++)
+        {
+            window.draw(sCard[i]);
+        }
 
         // Update the window
         window.display();

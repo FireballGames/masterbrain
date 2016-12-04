@@ -38,6 +38,9 @@ sf::String fontFile = "res/zx_spectrum-7.ttf";
 int fontSize = 24;
 sf::Color fontColor = sf::Color::Yellow;
 
+sf::String cardSetFile = "res/cardset.bmp";
+
+
 int blocksCount = 1000;
 int blockCols = 10;
 int blockRows = 10;
