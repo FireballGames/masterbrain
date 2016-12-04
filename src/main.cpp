@@ -89,14 +89,6 @@ int mainMenu(sf::RenderWindow &window)
     cardMoveText.setColor(sf::Color::Cyan);
     cardMoveText.move(boxPos[0] + 8 + 148, boxPos[1] + 16 * 6);
 
-    char levelStr[2];
-    sprintf(levelStr, "%d", level);
-    levelText.setString(levelStr);
-
-    cardSetText.setString(cardSets[cardSetId]);
-    soundText.setString(sound ? "ON" : "OFF");
-    cardMoveText.setString(cardMove ? "YES" : "NO");
-
 	// Start the game loop
     while (window.isOpen())
     {
@@ -114,19 +106,27 @@ int mainMenu(sf::RenderWindow &window)
                 if(event.key.code == sf::Keyboard::Num2)
                     return EXIT_SUCCESS;
                 if(event.key.code == sf::Keyboard::Num3)
-                    return EXIT_SUCCESS;
+                    level = (level < 3) ? level + 1 : 1;
                 if(event.key.code == sf::Keyboard::Num4)
-                    return EXIT_SUCCESS;
+                    cardSetId = (cardSetId < 3) ? cardSetId + 1 : 0;
                 if(event.key.code == sf::Keyboard::Num5)
-                    return EXIT_SUCCESS;
+                    sound = not sound;
                 if(event.key.code == sf::Keyboard::Num6)
-                    return EXIT_SUCCESS;
+                    cardMove = not cardMove;
                 if(event.key.code == sf::Keyboard::Num7)
                     return EXIT_SUCCESS;
                 if(event.key.code == sf::Keyboard::Escape)
                     window.close();
             }
         }
+
+        char levelStr[2];
+        sprintf(levelStr, "%d", level);
+        levelText.setString(levelStr);
+
+        cardSetText.setString(cardSets[cardSetId]);
+        soundText.setString(sound ? "ON" : "OFF");
+        cardMoveText.setString(cardMove ? "YES" : "NO");
 
         // Clear screen
         window.clear();
