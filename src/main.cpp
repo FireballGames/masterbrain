@@ -28,9 +28,16 @@ int gameWindow(sf::RenderWindow &window)
     float delay = 1;
     sf::Clock clock;
 
+    window.setMouseCursorVisible(false);
+
     // Load a sprite to display
     sf::Texture tBackground = loadBackground();
     sf::Sprite sBackground(tBackground);
+
+    sf::Texture tCursor;
+    if (!tCursor.loadFromFile(cursorFile))
+        return EXIT_FAILURE;
+    sf::Sprite sCursor(tCursor);
 
     sf::Texture tCardSet;
     if (!tCardSet.loadFromFile(cardSetFile))
@@ -73,15 +80,19 @@ int gameWindow(sf::RenderWindow &window)
             // Close window : exit
             if (event.type == sf::Event::Closed)
                 window.close();
-            if (event.type == sf::Event::KeyPressed)
+            if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
+            {
+                window.setMouseCursorVisible(true);
                 return EXIT_SUCCESS;
+            }
             if (event.type == sf::Event::MouseButtonPressed)
                 if (event.mouseButton.button == sf::Mouse::Left)
                     {
                         for(int i=0; i<cardsCount; i++)
                         {
-                            sf::Vector2i MousePoint = sf::Mouse::getPosition(window);
-                            if(sCard[i].getGlobalBounds().contains(MousePoint.x, MousePoint.y))
+                            // sf::Vector2i MousePoint = sf::Mouse::getPosition(window);
+                            // if(sCard[i].getGlobalBounds().contains(MousePoint.x, MousePoint.y))
+                            if(sCard[i].getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window))))
                                 if (selected[0] < 0)
                                 {
                                     selected[0] = i;
@@ -101,6 +112,9 @@ int gameWindow(sf::RenderWindow &window)
                         }
                     }
         }
+
+        sCursor.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
+        sCursor.move(-16, -8);
 
         if(timer > delay)
         {
@@ -138,9 +152,13 @@ int gameWindow(sf::RenderWindow &window)
             window.draw(sCard[i]);
         }
 
+        window.draw(sCursor);
+
         // Update the window
         window.display();
     }
+
+    window.setMouseCursorVisible(true);
 
     return EXIT_SUCCESS;
 }
