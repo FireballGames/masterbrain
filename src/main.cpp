@@ -22,7 +22,7 @@ sf::Texture loadBackground()
     return tBackground;
 }
 
-int gameWindow(sf::RenderWindow &window)
+int gameWindow(sf::RenderWindow &window, int players)
 {
     float timer = 0;
     float delay = 1;
@@ -242,9 +242,9 @@ int mainMenu(sf::RenderWindow &window)
             if (event.type == sf::Event::KeyPressed)
             {
                 if(event.key.code == sf::Keyboard::Num1)
-                    gameWindow(window);
+                    gameWindow(window, 1);
                 if(event.key.code == sf::Keyboard::Num2)
-                    gameWindow(window);
+                    gameWindow(window, 2);
                 if(event.key.code == sf::Keyboard::Num3)
                     level = (level < 3) ? level + 1 : 1;
                 if(event.key.code == sf::Keyboard::Num4)
