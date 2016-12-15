@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
 #include "settings.hpp"
+#include "MousePointer.h"
 
 bool isCollide(sf::Sprite s1, sf::Sprite s2)
 {
@@ -28,21 +29,18 @@ int gameWindow(sf::RenderWindow &window, int players)
     float delay = 1;
     sf::Clock clock;
 
-    window.setMouseCursorVisible(false);
-
     // Load a sprite to display
     sf::Texture tBackground = loadBackground();
     sf::Sprite sBackground(tBackground);
-
-    sf::Texture tCursor;
-    if (!tCursor.loadFromFile(cursorFile))
-        return EXIT_FAILURE;
-    sf::Sprite sCursor(tCursor);
 
     sf::Texture tCardSet;
     if (!tCardSet.loadFromFile(cardSetFile))
         return EXIT_FAILURE;
     sf::Sprite sCard[40];
+
+    MousePointer mp;
+    mp.LoadSprite();
+    mp.HideSystem(window);
 
     int field[40];
     int selected[2] = { -1, -1};
@@ -62,7 +60,6 @@ int gameWindow(sf::RenderWindow &window, int players)
     {
         sCard[i].setTexture(tCardSet);
         sCard[i].setPosition((i % columns) * 36 + 4 + boxPos[0], (i / columns) * 36 + 4 + boxPos[1]);
-        // sCard[i].setTextureRect(sf::IntRect(field[i] * 32, cardSetId * 32, 32, 32));
         sCard[i].setTextureRect(sf::IntRect(20 * 32, cardSetId * 32, 32, 32));
     }
 
@@ -82,7 +79,7 @@ int gameWindow(sf::RenderWindow &window, int players)
                 window.close();
             if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
             {
-                window.setMouseCursorVisible(true);
+                mp.ShowSystem(window);
                 return EXIT_SUCCESS;
             }
             if (event.type == sf::Event::MouseButtonPressed)
@@ -90,8 +87,6 @@ int gameWindow(sf::RenderWindow &window, int players)
                     {
                         for(int i=0; i<cardsCount; i++)
                         {
-                            // sf::Vector2i MousePoint = sf::Mouse::getPosition(window);
-                            // if(sCard[i].getGlobalBounds().contains(MousePoint.x, MousePoint.y))
                             if(sCard[i].getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window))))
                                 if (selected[0] < 0)
                                 {
@@ -113,8 +108,7 @@ int gameWindow(sf::RenderWindow &window, int players)
                     }
         }
 
-        sCursor.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
-        sCursor.move(-16, -8);
+        mp.MouseMoved(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
 
         if(timer > delay)
         {
@@ -152,13 +146,13 @@ int gameWindow(sf::RenderWindow &window, int players)
             window.draw(sCard[i]);
         }
 
-        window.draw(sCursor);
+        mp.DrawCursor(window);
 
         // Update the window
         window.display();
     }
 
-    window.setMouseCursorVisible(true);
+    mp.ShowSystem(window);
 
     return EXIT_SUCCESS;
 }

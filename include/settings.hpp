@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 sf::String gameTitle = "Master Brain";
- int winSize[2] = {800, 600};
+int winSize[2] = {800, 600};
 // int winSize[2] = {256, 192};
 
 const int M = 256;
