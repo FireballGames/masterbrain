@@ -28,8 +28,6 @@ sf::String backgrounds[10] = {
     "res/background/10.png",
 };
 
-sf::String cursorFile = "res/cursor.png";
-
 int logoTitlePos[2] = {boxPos[0], boxPos[1]};
 sf::String logoTitle = "res/title.bmp";
 

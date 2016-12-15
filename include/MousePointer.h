@@ -11,7 +11,6 @@ class MousePointer
         /** Default destructor */
         virtual ~MousePointer();
 
-        sf::String ImageFile; //!< Member variable "ImageFile"
         int LoadSprite();
         void MouseMoved(sf::Vector2f pos);
         void DrawCursor(sf::RenderWindow &window);
@@ -20,8 +19,6 @@ class MousePointer
         void ShowSystem(sf::RenderWindow &window);
     protected:
     private:
-        int ActivePoint[2]; //!< Member variable "ActivePoint[2]"
-
         sf::Texture PointerTexture;
         sf::Sprite PointerSprite;
 };

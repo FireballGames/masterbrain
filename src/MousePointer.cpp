@@ -1,13 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include "MousePointer.h"
+#include "MouseSettings.h"
 
 MousePointer::MousePointer()
 {
-    ImageFile = "res/cursor.png";
-    ActivePoint[0] = -16;
-    ActivePoint[1] = -8;
     //ctor
-    // LoadSprite();
 }
 
 MousePointer::~MousePointer()
@@ -17,7 +14,7 @@ MousePointer::~MousePointer()
 
 int MousePointer::LoadSprite()
 {
-    if (!PointerTexture.loadFromFile(ImageFile))
+    if (!PointerTexture.loadFromFile(cursorFilename))
         return EXIT_FAILURE;
     PointerSprite = sf::Sprite(PointerTexture);
     return EXIT_SUCCESS;
@@ -26,7 +23,7 @@ int MousePointer::LoadSprite()
 void MousePointer::MouseMoved(sf::Vector2f pos)
 {
     PointerSprite.setPosition(pos);
-    PointerSprite.move(ActivePoint[0], ActivePoint[1]);
+    PointerSprite.move(cursorPoint[0], cursorPoint[1]);
 }
 
 void MousePointer::DrawCursor(sf::RenderWindow &window)
