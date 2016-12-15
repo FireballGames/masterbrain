@@ -23,11 +23,6 @@ sf::Texture loadBackground()
     return tBackground;
 }
 
-sf::Vector2f getMousePos(sf::RenderWindow &window)
-{
-    return static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
-}
-
 int gameWindow(sf::RenderWindow &window, int players)
 {
     float timer = 0;

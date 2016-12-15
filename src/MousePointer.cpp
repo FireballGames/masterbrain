@@ -2,6 +2,11 @@
 #include "MousePointer.h"
 #include "MouseSettings.h"
 
+sf::Vector2f getMousePos(sf::RenderWindow &window)
+{
+    return static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
+}
+
 MousePointer::MousePointer()
 {
     //ctor
@@ -22,7 +27,8 @@ int MousePointer::LoadSprite()
 
 void MousePointer::MouseMove(sf::RenderWindow &window)
 {
-    PointerSprite.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
+    // PointerSprite.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
+    PointerSprite.setPosition(getMousePos(window));
     PointerSprite.move(cursorPoint[0], cursorPoint[1]);
 }
 

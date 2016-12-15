@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+sf::Vector2f getMousePos(sf::RenderWindow &window);
+
 class MousePointer
 {
     public:
