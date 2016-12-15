@@ -9,6 +9,7 @@ sf::Vector2f MousePointer::getMousePos(sf::RenderWindow &window)
 
 MousePointer::MousePointer()
 {
+    LoadSprite();
     //ctor
 }
 

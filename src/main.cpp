@@ -39,7 +39,7 @@ int gameWindow(sf::RenderWindow &window, int players)
     sf::Sprite sCard[40];
 
     MousePointer mp;
-    mp.LoadSprite();
+    // mp.LoadSprite();
     mp.HideSystem(window);
 
     int field[40];
