@@ -9,7 +9,11 @@ sf::Vector2f MousePointer::getMousePos(sf::RenderWindow &window)
 
 MousePointer::MousePointer()
 {
-    LoadSprite();
+    int status = LoadSprite();
+    if(status != EXIT_SUCCESS)
+    {
+        throw status;
+    }
     //ctor
 }
 
