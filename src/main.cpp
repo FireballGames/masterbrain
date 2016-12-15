@@ -25,7 +25,6 @@ int gameWindow(sf::RenderWindow &window, int players)
     sf::Sprite sCard[40];
 
     MousePointer mp;
-    // mp.LoadSprite();
     mp.HideSystem(window);
 
     int field[40];
@@ -80,7 +79,7 @@ int gameWindow(sf::RenderWindow &window, int players)
                                 }
                                 else
                                 {
-                                    if(selected[1] < 0)
+                                    if((selected[1] < 0) && (selected[0] != i))
                                     {
                                         selected[1] = i;
                                         timer = 0;
