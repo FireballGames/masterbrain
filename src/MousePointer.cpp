@@ -20,14 +20,15 @@ int MousePointer::LoadSprite()
     return EXIT_SUCCESS;
 }
 
-void MousePointer::MouseMoved(sf::Vector2f pos)
+void MousePointer::MouseMove(sf::RenderWindow &window)
 {
-    PointerSprite.setPosition(pos);
+    PointerSprite.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
     PointerSprite.move(cursorPoint[0], cursorPoint[1]);
 }
 
 void MousePointer::DrawCursor(sf::RenderWindow &window)
 {
+    MouseMove(window);
     window.draw(PointerSprite);
 }
 

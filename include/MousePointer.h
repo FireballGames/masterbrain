@@ -12,7 +12,7 @@ class MousePointer
         virtual ~MousePointer();
 
         int LoadSprite();
-        void MouseMoved(sf::Vector2f pos);
+        void MouseMove(sf::RenderWindow &window);
         void DrawCursor(sf::RenderWindow &window);
 
         void HideSystem(sf::RenderWindow &window);

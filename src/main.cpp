@@ -23,6 +23,11 @@ sf::Texture loadBackground()
     return tBackground;
 }
 
+sf::Vector2f getMousePos(sf::RenderWindow &window)
+{
+    return static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
+}
+
 int gameWindow(sf::RenderWindow &window, int players)
 {
     float timer = 0;
@@ -87,7 +92,7 @@ int gameWindow(sf::RenderWindow &window, int players)
                     {
                         for(int i=0; i<cardsCount; i++)
                         {
-                            if(sCard[i].getGlobalBounds().contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window))))
+                            if(sCard[i].getGlobalBounds().contains(getMousePos(window)))
                                 if (selected[0] < 0)
                                 {
                                     selected[0] = i;
@@ -107,8 +112,6 @@ int gameWindow(sf::RenderWindow &window, int players)
                         }
                     }
         }
-
-        mp.MouseMoved(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
 
         if(timer > delay)
         {
