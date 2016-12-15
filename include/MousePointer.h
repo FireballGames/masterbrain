@@ -3,8 +3,6 @@
 
 #include <SFML/Graphics.hpp>
 
-sf::Vector2f getMousePos(sf::RenderWindow &window);
-
 class MousePointer
 {
     public:
@@ -12,6 +10,8 @@ class MousePointer
         MousePointer();
         /** Default destructor */
         virtual ~MousePointer();
+
+        sf::Vector2f getMousePos(sf::RenderWindow &window);
 
         int LoadSprite();
         void MouseMove(sf::RenderWindow &window);

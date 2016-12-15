@@ -87,7 +87,7 @@ int gameWindow(sf::RenderWindow &window, int players)
                     {
                         for(int i=0; i<cardsCount; i++)
                         {
-                            if(sCard[i].getGlobalBounds().contains(getMousePos(window)))
+                            if(sCard[i].getGlobalBounds().contains(mp.getMousePos(window)))
                                 if (selected[0] < 0)
                                 {
                                     selected[0] = i;

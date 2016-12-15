@@ -2,7 +2,7 @@
 #include "MousePointer.h"
 #include "MouseSettings.h"
 
-sf::Vector2f getMousePos(sf::RenderWindow &window)
+sf::Vector2f MousePointer::getMousePos(sf::RenderWindow &window)
 {
     return static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
 }
