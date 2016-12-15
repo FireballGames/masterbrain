@@ -2,25 +2,11 @@
 #include <time.h>
 #include "settings.hpp"
 #include "MousePointer.h"
+#include "background.h"
 
 bool isCollide(sf::Sprite s1, sf::Sprite s2)
 {
     return s1.getGlobalBounds().intersects(s2.getGlobalBounds());
-}
-
-sf::String backgroundFile()
-{
-    int backgroundId = rand() % backgroundsCount;
-
-    return backgrounds[backgroundId];
-}
-
-sf::Texture loadBackground()
-{
-    sf::Texture tBackground;
-    tBackground.loadFromFile(backgroundFile());
-
-    return tBackground;
 }
 
 int gameWindow(sf::RenderWindow &window, int players)
