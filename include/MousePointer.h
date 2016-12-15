@@ -12,17 +12,17 @@ class MousePointer
         virtual ~MousePointer();
 
         sf::Vector2f getMousePos(sf::RenderWindow &window);
-
-        int LoadSprite();
-        void MouseMove(sf::RenderWindow &window);
         void DrawCursor(sf::RenderWindow &window);
 
         void HideSystem(sf::RenderWindow &window);
         void ShowSystem(sf::RenderWindow &window);
     protected:
+        int LoadSprite();
     private:
         sf::Texture PointerTexture;
         sf::Sprite PointerSprite;
+
+        void MouseMove(sf::RenderWindow &window);
 };
 
 #endif // MOUSEPOINTER_H
