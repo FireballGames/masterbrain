@@ -6,23 +6,25 @@
 class MousePointer
 {
     public:
+        sf::RenderWindow &window;
+
         /** Default constructor */
-        MousePointer();
+        MousePointer(sf::RenderWindow &window);
         /** Default destructor */
         virtual ~MousePointer();
 
-        sf::Vector2f getMousePos(sf::RenderWindow &window);
-        void DrawCursor(sf::RenderWindow &window);
+        sf::Vector2f getMousePos();
+        void DrawCursor();
 
-        void HideSystem(sf::RenderWindow &window);
-        void ShowSystem(sf::RenderWindow &window);
+        void HideSystem();
+        void ShowSystem();
     protected:
         int LoadSprite();
     private:
         sf::Texture PointerTexture;
         sf::Sprite PointerSprite;
 
-        void MouseMove(sf::RenderWindow &window);
+        void MouseMove();
 };
 
 #endif // MOUSEPOINTER_H

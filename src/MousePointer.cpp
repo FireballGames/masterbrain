@@ -2,12 +2,12 @@
 #include "MousePointer.h"
 #include "MouseSettings.h"
 
-sf::Vector2f MousePointer::getMousePos(sf::RenderWindow &window)
+sf::Vector2f MousePointer::getMousePos()
 {
     return static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
 }
 
-MousePointer::MousePointer()
+MousePointer::MousePointer(sf::RenderWindow &window): window(window)
 {
     int status = LoadSprite();
     if(status != EXIT_SUCCESS)
@@ -30,25 +30,25 @@ int MousePointer::LoadSprite()
     return EXIT_SUCCESS;
 }
 
-void MousePointer::MouseMove(sf::RenderWindow &window)
+void MousePointer::MouseMove()
 {
     // PointerSprite.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
-    PointerSprite.setPosition(getMousePos(window));
+    PointerSprite.setPosition(getMousePos());
     PointerSprite.move(cursorPoint[0], cursorPoint[1]);
 }
 
-void MousePointer::DrawCursor(sf::RenderWindow &window)
+void MousePointer::DrawCursor()
 {
-    MouseMove(window);
+    MouseMove();
     window.draw(PointerSprite);
 }
 
-void MousePointer::HideSystem(sf::RenderWindow &window)
+void MousePointer::HideSystem()
 {
     window.setMouseCursorVisible(false);
 }
 
-void MousePointer::ShowSystem(sf::RenderWindow &window)
+void MousePointer::ShowSystem()
 {
     window.setMouseCursorVisible(true);
 }

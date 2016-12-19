@@ -24,8 +24,8 @@ int gameWindow(sf::RenderWindow &window, int players)
         return EXIT_FAILURE;
     sf::Sprite sCard[40];
 
-    MousePointer mp;
-    mp.HideSystem(window);
+    MousePointer mp(window);
+    mp.HideSystem();
 
     int field[40];
     int selected[2] = { -1, -1};
@@ -64,7 +64,7 @@ int gameWindow(sf::RenderWindow &window, int players)
                 window.close();
             if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
             {
-                mp.ShowSystem(window);
+                mp.ShowSystem();
                 return EXIT_SUCCESS;
             }
             if (event.type == sf::Event::MouseButtonPressed)
@@ -72,7 +72,7 @@ int gameWindow(sf::RenderWindow &window, int players)
                     {
                         for(int i=0; i<cardsCount; i++)
                         {
-                            if(sCard[i].getGlobalBounds().contains(mp.getMousePos(window)))
+                            if(sCard[i].getGlobalBounds().contains(mp.getMousePos()))
                                 if (selected[0] < 0)
                                 {
                                     selected[0] = i;
@@ -129,13 +129,13 @@ int gameWindow(sf::RenderWindow &window, int players)
             window.draw(sCard[i]);
         }
 
-        mp.DrawCursor(window);
+        mp.DrawCursor();
 
         // Update the window
         window.display();
     }
 
-    mp.ShowSystem(window);
+    mp.ShowSystem();
 
     return EXIT_SUCCESS;
 }
