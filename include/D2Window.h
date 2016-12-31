@@ -17,6 +17,7 @@ class D2Window
         virtual void show() =0;
         virtual int OnEvent(sf::Event event) =0;
     protected:
+        bool running = true;
     private:
 };
 

@@ -59,6 +59,7 @@ int CardsWindow::OnEvent(sf::Event event)
     if ((event.type == sf::Event::KeyPressed) || (event.type == sf::Event::MouseButtonPressed))
     {
         window.setMouseCursorVisible(true);
+        running = false;
         return EXIT_SUCCESS;
     }
 

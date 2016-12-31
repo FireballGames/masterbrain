@@ -106,6 +106,7 @@ int GameWindow::OnEvent(sf::Event event)
     if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
     {
         mp.ShowSystem();
+        running = false;
         return 1;
     }
 

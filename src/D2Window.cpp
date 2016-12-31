@@ -13,7 +13,7 @@ D2Window::~D2Window()
 int D2Window::run()
 {
     load();
-    while (window.isOpen())
+    while (running && window.isOpen())
     {
         sf::Event event;
         while (window.pollEvent(event))
