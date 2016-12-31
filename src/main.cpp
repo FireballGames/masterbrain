@@ -2,7 +2,10 @@
 #include <time.h>
 #include "settings.hpp"
 #include "MousePointer.h"
+#include "D2Window.h"
+#include "win/MenuWindow.h"
 #include "background.h"
+#include "globals.h"
 
 bool isCollide(sf::Sprite s1, sf::Sprite s2)
 {
@@ -11,6 +14,8 @@ bool isCollide(sf::Sprite s1, sf::Sprite s2)
 
 int gameWindow(sf::RenderWindow &window, int players)
 {
+    // D2Window GameWin(window);
+
     float timer = 0;
     float delay = 1;
     sf::Clock clock;
@@ -142,6 +147,8 @@ int gameWindow(sf::RenderWindow &window, int players)
 
 int showCards(sf::RenderWindow &window)
 {
+    // D2Window CardsWin(window);
+
     sf::Texture tBackground = loadBackground();
     sf::Sprite sBackground(tBackground);
 
@@ -210,69 +217,8 @@ int showCards(sf::RenderWindow &window)
 
 int mainMenu(sf::RenderWindow &window)
 {
-    sf::Texture tLogoTitle;
-    if (!tLogoTitle.loadFromFile(logoTitle))
-        return EXIT_FAILURE;
-    sf::Sprite sLogoTitle(tLogoTitle);
-    sLogoTitle.move(logoTitlePos[0], logoTitlePos[1]);
-
-    sf::Texture tLogoCredits;
-    if (!tLogoCredits.loadFromFile(logoCredits))
-        return EXIT_FAILURE;
-    sf::Sprite sLogoCredits(tLogoCredits);
-    sLogoCredits.move(logoCreditsPos[0], logoCreditsPos[1]);
-
-    sf::Font mainFont;
-    if (!mainFont.loadFromFile(fontFile))
-        return EXIT_FAILURE;
-
-    char menuStrings[8][64] = {
-        "START ONE PLAYER GAME\n",
-        "START TWO PLAYER GAME\n",
-        "LEVEL\n",
-        "CARD SET\n",
-        "SOUND\n",
-        "CARDS MOVING\n",
-        "VIEW CARD SET\n",
-        "ESC\tEXIT\n"
-    };
-
-    sf::Text menuPoints[7];
-    for(int i=0; i < 7; i++)
-    {
-        char menu[32];
-        sprintf(menu, "%d. %s\n", i + 1, menuStrings[i]);
-
-        menuPoints[i].setFont(mainFont);
-        menuPoints[i].setCharacterSize(fontSize);
-        menuPoints[i].setColor(fontColor);
-        menuPoints[i].move(boxPos[0] + 8, boxPos[1] + 16 * (i + 1));
-        menuPoints[i].setString(menu);
-    }
-
-    sf::Text levelText;
-    levelText.setFont(mainFont);
-    levelText.setCharacterSize(fontSize);
-    levelText.setColor(sf::Color::Cyan);
-    levelText.move(boxPos[0] + 8 + 84, boxPos[1] + 16 * 3);
-
-    sf::Text cardSetText;
-    cardSetText.setFont(mainFont);
-    cardSetText.setCharacterSize(fontSize);
-    cardSetText.setColor(sf::Color::Cyan);
-    cardSetText.move(boxPos[0] + 8 + 112, boxPos[1] + 16 * 4);
-
-    sf::Text soundText;
-    soundText.setFont(mainFont);
-    soundText.setCharacterSize(fontSize);
-    soundText.setColor(sf::Color::Cyan);
-    soundText.move(boxPos[0] + 8 + 84, boxPos[1] + 16 * 5);
-
-    sf::Text cardMoveText;
-    cardMoveText.setFont(mainFont);
-    cardMoveText.setCharacterSize(fontSize);
-    cardMoveText.setColor(sf::Color::Cyan);
-    cardMoveText.move(boxPos[0] + 8 + 148, boxPos[1] + 16 * 6);
+    MenuWindow win(window);
+    win.load();
 
 	// Start the game loop
     while (window.isOpen())
@@ -305,29 +251,7 @@ int mainMenu(sf::RenderWindow &window)
             }
         }
 
-        char levelStr[2];
-        sprintf(levelStr, "%d", level);
-        levelText.setString(levelStr);
-
-        cardSetText.setString(cardSets[cardSetId]);
-        soundText.setString(sound ? "ON" : "OFF");
-        cardMoveText.setString(cardMove ? "YES" : "NO");
-
-        window.clear();
-
-        window.draw(sLogoTitle);
-        window.draw(sLogoCredits);
-        for(int i=0; i < 7; i++)
-        {
-            window.draw(menuPoints[i]);
-        }
-
-        window.draw(levelText);
-        window.draw(cardSetText);
-        window.draw(soundText);
-        window.draw(cardMoveText);
-
-        window.display();
+        win.show();
     }
 
     return EXIT_SUCCESS;
