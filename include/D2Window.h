@@ -11,6 +11,8 @@ class D2Window
         D2Window(sf::RenderWindow &window);
         virtual ~D2Window();
 
+        virtual int run();
+
         virtual int load() =0;
         virtual void show() =0;
         virtual int OnEvent(sf::Event event) =0;

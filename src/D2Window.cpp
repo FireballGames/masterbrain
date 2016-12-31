@@ -9,3 +9,18 @@ D2Window::~D2Window()
 {
     //dtor
 }
+
+int D2Window::run()
+{
+    load();
+    while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            int action = OnEvent(event);
+        }
+
+        show();
+    }
+}

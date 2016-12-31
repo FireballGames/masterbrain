@@ -104,7 +104,10 @@ int GameWindow::OnEvent(sf::Event event)
         window.close();
 
     if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
+    {
+        mp.ShowSystem();
         return 1;
+    }
 
     if (event.type == sf::Event::MouseButtonPressed)
         if (event.mouseButton.button == sf::Mouse::Left)

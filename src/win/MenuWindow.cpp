@@ -1,6 +1,9 @@
 #include "win/MenuWindow.h"
 #include "globals.h"
 #include "settings.hpp"
+#include "win/GameWindow.h"
+#include "win/CardsWindow.h"
+
 
 int logoTitlePos[2] = {boxPos[0], boxPos[1]};
 sf::String logoTitle = "res/title.bmp";
@@ -11,6 +14,23 @@ sf::String logoCredits = "res/credits.bmp";
 sf::String fontFile = "res/zx_spectrum-7.ttf";
 int fontSize = 24;
 sf::Color fontColor = sf::Color::Yellow;
+
+
+int gameWindow(sf::RenderWindow &window, int players)
+{
+    GameWindow win(window);
+    win.run();
+
+    win.mp.ShowSystem();
+    return EXIT_SUCCESS;
+}
+
+int showCards(sf::RenderWindow &window)
+{
+    CardsWindow win(window);
+    win.run();
+    return EXIT_SUCCESS;
+}
 
 MenuWindow::MenuWindow(sf::RenderWindow &window): D2Window(window)
 {
@@ -118,9 +138,9 @@ int MenuWindow::OnEvent(sf::Event event)
     if (event.type == sf::Event::KeyPressed)
     {
         if(event.key.code == sf::Keyboard::Num1)
-            return 1;
+            gameWindow(window, 1);
         if(event.key.code == sf::Keyboard::Num2)
-            return 2;
+            gameWindow(window, 2);
         if(event.key.code == sf::Keyboard::Num3)
             level = (level < 3) ? level + 1 : 1;
         if(event.key.code == sf::Keyboard::Num4)
@@ -130,7 +150,7 @@ int MenuWindow::OnEvent(sf::Event event)
         if(event.key.code == sf::Keyboard::Num6)
             cardMove = not cardMove;
         if(event.key.code == sf::Keyboard::Num7)
-            return 3;
+            showCards(window);
         if(event.key.code == sf::Keyboard::Escape)
             window.close();
     }
