@@ -15,13 +15,13 @@ class GameWindow : public D2Window
         sf::Clock clock;
         int cardsCount;
         MousePointer mp;
-        sf::Sprite sCard[40];
         int selected[2] = { -1, -1};
         int field[40];
 
         sf::Texture tBackground;
         sf::Sprite sBackground;
         sf::Texture tCardSet;
+        sf::Sprite sCard[40];
 
         int load();
         void show();
