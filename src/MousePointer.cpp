@@ -14,7 +14,6 @@ MousePointer::MousePointer(sf::RenderWindow &window): window(window)
     {
         throw status;
     }
-    //ctor
 }
 
 MousePointer::~MousePointer()
