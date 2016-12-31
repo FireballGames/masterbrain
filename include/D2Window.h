@@ -13,6 +13,7 @@ class D2Window
 
         virtual int load() =0;
         virtual void show() =0;
+        virtual int OnEvent(sf::Event event) =0;
     protected:
     private:
 };

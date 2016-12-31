@@ -109,3 +109,30 @@ void MenuWindow::show()
 
         window.display();
 }
+
+int MenuWindow::OnEvent(sf::Event event)
+{
+    // Close window : exit
+    if (event.type == sf::Event::Closed)
+        window.close();
+    if (event.type == sf::Event::KeyPressed)
+    {
+        if(event.key.code == sf::Keyboard::Num1)
+            return 1;
+        if(event.key.code == sf::Keyboard::Num2)
+            return 2;
+        if(event.key.code == sf::Keyboard::Num3)
+            level = (level < 3) ? level + 1 : 1;
+        if(event.key.code == sf::Keyboard::Num4)
+            cardSetId = (cardSetId < 3) ? cardSetId + 1 : 0;
+        if(event.key.code == sf::Keyboard::Num5)
+            sound = not sound;
+        if(event.key.code == sf::Keyboard::Num6)
+            cardMove = not cardMove;
+        if(event.key.code == sf::Keyboard::Num7)
+            return 3;
+        if(event.key.code == sf::Keyboard::Escape)
+            window.close();
+    }
+    return 0;
+}

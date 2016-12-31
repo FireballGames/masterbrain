@@ -22,6 +22,7 @@ class MenuWindow : public D2Window
 
         int load();
         void show();
+        int OnEvent(sf::Event event);
     protected:
         sf::Texture tLogoTitle;
         sf::Texture tLogoCredits;
