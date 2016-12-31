@@ -1,5 +1,6 @@
-#ifndef SETTINGS_HPP_INCLUDED
-#define SETTINGS_HPP_INCLUDED
+#pragma once
+#ifndef D2SETTINGS_HPP_INCLUDED
+#define D2SETTINGS_HPP_INCLUDED
 
 #include <SFML/Graphics.hpp>
 
@@ -14,18 +15,7 @@ int boxSize[2] = {M, N};
 // int pointSize[2] = {18, 18};
 int fps = 60;
 
-int logoTitlePos[2] = {boxPos[0], boxPos[1]};
-sf::String logoTitle = "res/title.bmp";
-
-int logoCreditsPos[2] = {boxPos[0], boxPos[1] + N - 40};
-sf::String logoCredits = "res/credits.bmp";
-
-sf::String fontFile = "res/zx_spectrum-7.ttf";
-int fontSize = 24;
-sf::Color fontColor = sf::Color::Yellow;
-
 sf::String cardSetFile = "res/cardset.bmp";
-
 
 int blocksCount = 1000;
 int blockCols = 10;
@@ -49,37 +39,5 @@ sf::String ball = "res/ball.png";
 sf::String paddle = "res/paddle.png";
 
 // sf::String interface = "res/frame.png";
-
-int level = 2; // 20(4), 30(6), 40(8)
-// JetPac
-// ??? Knife
-// Batman
-// Jack Nipper
-
-// Sabrewolf
-// ----
-// ----
-// Cookie
-
-// Pssst
-// ----
-// ----
-// ??? Head
-
-// ----
-// ??? Viking
-// ??? Panama
-// ----
-
-int cardSetId = 1;
-bool sound = true;
-bool cardMove = false;
-
-sf::String cardSets[4] = {
-    "NUMBERS",
-    "SPECTRUM HEROES",
-    "KIDS",
-    "COLOUR MASTER",
-};
 
 #endif // SETTINGS_HPP_INCLUDED
