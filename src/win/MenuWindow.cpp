@@ -1,17 +1,11 @@
 #include "win/MenuWindow.h"
 #include "globals.h"
+#include "settings.hpp"
 
-int winMenuSize[2] = {800, 600};
-
-const int MenuM = 256;
-const int MenuN = 192;
-int MenuBoxPos[2] = {(winMenuSize[0] - MenuM)/2, (winMenuSize[1] - MenuN)/2};
-int MenuBoxSize[2] = {MenuM, MenuN};
-
-int logoTitlePos[2] = {MenuBoxPos[0], MenuBoxPos[1]};
+int logoTitlePos[2] = {boxPos[0], boxPos[1]};
 sf::String logoTitle = "res/title.bmp";
 
-int logoCreditsPos[2] = {MenuBoxPos[0], MenuBoxPos[1] + MenuN - 40};
+int logoCreditsPos[2] = {boxPos[0], boxPos[1] + N - 40};
 sf::String logoCredits = "res/credits.bmp";
 
 sf::String fontFile = "res/zx_spectrum-7.ttf";
@@ -62,29 +56,29 @@ int MenuWindow::load()
         menuPoints[i].setFont(mainFont);
         menuPoints[i].setCharacterSize(fontSize);
         menuPoints[i].setColor(fontColor);
-        menuPoints[i].move(MenuBoxPos[0] + 8, MenuBoxPos[1] + 16 * (i + 1));
+        menuPoints[i].move(boxPos[0] + 8, boxPos[1] + 16 * (i + 1));
         menuPoints[i].setString(menu);
     }
 
     levelText.setFont(mainFont);
     levelText.setCharacterSize(fontSize);
     levelText.setColor(sf::Color::Cyan);
-    levelText.move(MenuBoxPos[0] + 8 + 84, MenuBoxPos[1] + 16 * 3);
+    levelText.move(boxPos[0] + 8 + 84, boxPos[1] + 16 * 3);
 
     cardSetText.setFont(mainFont);
     cardSetText.setCharacterSize(fontSize);
     cardSetText.setColor(sf::Color::Cyan);
-    cardSetText.move(MenuBoxPos[0] + 8 + 112, MenuBoxPos[1] + 16 * 4);
+    cardSetText.move(boxPos[0] + 8 + 112, boxPos[1] + 16 * 4);
 
     soundText.setFont(mainFont);
     soundText.setCharacterSize(fontSize);
     soundText.setColor(sf::Color::Cyan);
-    soundText.move(MenuBoxPos[0] + 8 + 84, MenuBoxPos[1] + 16 * 5);
+    soundText.move(boxPos[0] + 8 + 84, boxPos[1] + 16 * 5);
 
     cardMoveText.setFont(mainFont);
     cardMoveText.setCharacterSize(fontSize);
     cardMoveText.setColor(sf::Color::Cyan);
-    cardMoveText.move(MenuBoxPos[0] + 8 + 148, MenuBoxPos[1] + 16 * 6);
+    cardMoveText.move(boxPos[0] + 8 + 148, boxPos[1] + 16 * 6);
 
     return 1;
 }

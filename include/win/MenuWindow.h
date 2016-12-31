@@ -3,13 +3,6 @@
 
 #include "D2Window.h"
 
-extern int winMenuSize[2];
-
-extern const int MenuM;
-extern const int MenuN;
-extern int MenuBoxPos[2];
-extern int MenuBoxSize[2];
-
 extern int logoTitlePos[2];
 extern sf::String logoTitle;
 
