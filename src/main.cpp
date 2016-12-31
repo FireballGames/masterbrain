@@ -221,33 +221,24 @@ int mainMenu(sf::RenderWindow &window)
     win.load();
 
 	// Start the game loop
-    while (window.isOpen())
+    while (win.window.isOpen())
     {
         // Process events
         sf::Event event;
-        while (window.pollEvent(event))
+        while (win.window.pollEvent(event))
         {
-            // Close window : exit
-            if (event.type == sf::Event::Closed)
-                window.close();
-            if (event.type == sf::Event::KeyPressed)
+            int action = win.OnEvent(event);
+            if (action == 1)
             {
-                if(event.key.code == sf::Keyboard::Num1)
-                    gameWindow(window, 1);
-                if(event.key.code == sf::Keyboard::Num2)
-                    gameWindow(window, 2);
-                if(event.key.code == sf::Keyboard::Num3)
-                    level = (level < 3) ? level + 1 : 1;
-                if(event.key.code == sf::Keyboard::Num4)
-                    cardSetId = (cardSetId < 3) ? cardSetId + 1 : 0;
-                if(event.key.code == sf::Keyboard::Num5)
-                    sound = not sound;
-                if(event.key.code == sf::Keyboard::Num6)
-                    cardMove = not cardMove;
-                if(event.key.code == sf::Keyboard::Num7)
-                    showCards(window);
-                if(event.key.code == sf::Keyboard::Escape)
-                    window.close();
+                gameWindow(win.window, 1);
+            }
+            else if(action == 2)
+            {
+                gameWindow(win.window, 2);
+            }
+            else if(action == 3)
+            {
+                showCards(win.window);
             }
         }
 
